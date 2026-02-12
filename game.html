@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tic Tac Toe</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 96px);
+            gap: 8px;
+        }
+        .cell {
+            width: 96px;
+            height: 96px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            border-radius: 12px;
+            background: #f1f5f9;
+            transition: 0.2s;
+        }
+        .cell:hover:not(:disabled) {
+            background: #e2e8f0;
+            transform: scale(1.05);
+        }
+        .cell:disabled {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-slate-100">
+
+<div class="bg-white shadow-xl rounded-2xl p-8 text-center w-full max-w-sm">
+    <h2 class="text-2xl font-bold mb-2">Tic Tac Toe</h2>
+    <p class="text-gray-600 mb-4">
+        You ❌ vs Computer ⭕
+    </p>
+
+    <div id="board" class="board mx-auto mb-4"></div>
+    <p id="status" class="text-lg font-semibold text-indigo-600"></p>
+</div>
+
+<script>
+let board = [
+    [" ", " ", " "],
+    [" ", " ", " "],
+    [" ", " ", " "]
+];
+
+let gameOver = false;
+
+function render() {
+    const boardDiv = document.getElementById("board");
+    boardDiv.innerHTML = "";
+
+    board.forEach((row, i) => {
+        row.forEach((cell, j) => {
+            const btn = document.createElement("button");
+            btn.className = "cell";
+            btn.textContent = cell === " " ? "" : cell;
+            btn.disabled = cell !== " " || gameOver;
+            btn.onclick = () => play(i, j);
+            boardDiv.appendChild(btn);
+        });
+    });
+}
+
+async function play(i, j) {
+    if (gameOver || board[i][j] !== " ") return;
+
+    // User move
+    board[i][j] = "X";
+    render();
+
+    try {
+        const res = await fetch("http://127.0.0.1:8000/move", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ board })
+        });
+
+        const data = await res.json();
+        board = data.board;
+        render();
+
+        if (data.winner) {
+            gameOver = true;
+            document.getElementById("status").textContent =
+                data.winner === "Draw"
+                    ? "It's a draw!"
+                    : `${data.winner} wins!`;
+        }
+
+    } catch (err) {
+        console.error(err);
+        document.getElementById("status").textContent =
+            "Server error. Is FastAPI running?";
+    }
+}
+
+render();
+</script>
+
+</body>
+</html>
