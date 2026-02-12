@@ -2,9 +2,9 @@
 ** AI always wins or it's a draw 
 ## The algorithms is implemented in python but to make it interactive I've used fastapi
 <h1>How to use it?</h1>
-'
+
 clone the repo 
-git clone https://github.com/fuadnuri/minimax
+```bash git clone https://github.com/fuadnuri/minimax-ai ```
 
 
 install python on your machine
