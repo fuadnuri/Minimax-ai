@@ -1,31 +1,65 @@
 # Hello welcome to minmax ai player of tiktactoe player
 ** AI always wins or it's a draw 
-## The algorithms is implemented in python but to make it interactive I've used fastapi
-<h1>How to use it?</h1>
 
-clone the repo 
-```bash git clone https://github.com/fuadnuri/minimax-ai ```
+```markdown
+# Minimax AI
 
+A high-performance implementation of the Minimax algorithm served via FastAPI. This project provides an API interface to calculate optimal moves for game-theory-based scenarios.
 
-install python on your machine
+---
 
-cd into the project folder
-<h2>
-create python virtual environment
-</h2>
+## 🚀 Getting Started
 
-<b>linux:</b> python3 -m venv [name_your_env]
-<b>windows: <b> py -m virtualenv [name_your_env]
-but on windows make sure to allow scripts on powershell
+Follow these steps to set up and run the project on your local machine.
 
-<h2 > activate your environment <h2>
-<b>linux:</b>source [name_of_your_env]/bin/activate<br/>
-<b>windows:</b>[name_of_youur_env]/sources/activate</br>
+### 1. Clone the Repository
+Open your terminal and run:
+```bash
+git clone [https://github.com/fuadnuri/minimax-ai](https://github.com/fuadnuri/minimax-ai)
+cd minimax-ai
 
-<h2> install requried libraries</h2>
-pip install requirements.txt<br/>
+```
+### 1. Just copy the `.ipynb` file to your jupitor nobebook and run it for command line testing 
+### Or open the `index.html` file to test it in web based invironment. follow steps below.
+### 2. Environment Setup
 
+Create a virtual environment to keep your project dependencies isolated.
 
-<h2> There you go!</h2>
-go to terminal and run <br/>
+| Platform | Command to Create | Command to Activate |
+| --- | --- | --- |
+| **Linux / macOS** | `python3 -m venv venv` | `source venv/bin/activate` |
+| **Windows** | `python -m venv venv` | `.\venv\Scripts\activate` |
+
+> **💡 Windows Tip:** If you get an error about "scripts are disabled on this system," run PowerShell as Administrator and execute:
+> `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+### 3. Install Dependencies
+
+Once your virtual environment is active, install the required packages:
+
+```bash
+pip install -r requirements.txt
+
+```
+
+### 4. Run the Application
+
+Start the FastAPI server using the following command:
+
+```bash
 fastapi run main.py
+
+```
+
+---
+## then open the index.html 
+
+## 🧠 How Minimax Works
+
+The Minimax algorithm is a decision-making tool used in game theory to find the optimal move for a player, assuming that the opponent is also playing optimally.
+
+## 🛠 Tech Stack
+
+* **Language:** Python 3.x
+* **Framework:** [FastAPI](https://fastapi.tiangolo.com/)
+* **Logic:** Minimax Algorithm (Recursive backtracking)
